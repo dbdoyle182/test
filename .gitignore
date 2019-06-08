@@ -1,0 +1,6 @@
+# Backend
+
+/testing
+/node_modules
+.env
+
