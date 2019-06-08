@@ -17,6 +17,11 @@ app.use(cors());
 
 app.use(routes);
 
+if(process.env.NODE_ENV === "production") 
+  app.use(express.static("./client/build/"));
+else 
+  app.use(express.static("./client/public/"));
+
 
 app.listen(PORT, function() {
   console.log(`Server listening on: http://localhost:` + PORT);
