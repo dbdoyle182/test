@@ -1,16 +1,28 @@
 require("dotenv").config();
 const uuid = require("uuid/v1");
 const AWS = require("aws-sdk");
+let awsconfig;
+if(process.env.NODE_ENV === "production") {
+    awsconfig = {
+        region: `us-east-1`,
+        accessKeyId: process.env.AWS_ID,
+        secretAccessKey: process.env.AWS_SECRET
+      }
+} else {
+    awsconfig = {
+        region: `us-east-1`,
+        endpoint: "http://localhost:8000",
+        accessKeyId: process.env.AWS_ID,
+        secretAccessKey: process.env.AWS_SECRET
+      }
+}
 // Set the region
-AWS.config.update({
-  region: `us-east-1`,
-  accessKeyId: process.env.AWS_ID,
-  secretAccessKey: process.env.AWS_SECRET
-});
+AWS.config.update(awsconfig);
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 const utils = {
+    awsconfig: awsconfig,
     addRobotToUser: (username, robot, callback) => {
         const { robotId } = robot;
         console.log("Username", username);

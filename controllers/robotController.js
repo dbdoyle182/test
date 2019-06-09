@@ -3,11 +3,7 @@ const uuid = require("uuid/v1");
 const utils = require("./utils")
 const AWS = require("aws-sdk");
 // Set the region
-AWS.config.update({
-  region: `us-east-1`,
-  accessKeyId: process.env.AWS_ID,
-  secretAccessKey: process.env.AWS_SECRET
-});
+AWS.config.update(utils.awsconfig);
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 const errorHandle = (err, res) => {
     console.log(err);

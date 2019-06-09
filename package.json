@@ -11,7 +11,11 @@
     "install": "cd client && yarn install;",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
-    "installDeps": "yarn install && cd client && yarn install"
+    "installDeps": "yarn install && cd client && yarn install",
+    "create-db": "cd models && node createRobotDB.js && cd ..",
+    "delete-db": "cd models && node deleteRobotDB.js && cd ..",
+    "load-data": "cd models && node loadRobotDB.js && cd ..",
+    "read-data": "cd models && node readRobotDB.js && cd .."
   },
   "repository": {
     "type": "git",

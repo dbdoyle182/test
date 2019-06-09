@@ -1,11 +1,8 @@
 require("dotenv").config();
 const AWS = require("aws-sdk");
+const { awsconfig } = require("./utils");
 // Set the region
-AWS.config.update({
-  region: `us-east-1`,
-  accessKeyId: process.env.AWS_ID,
-  secretAccessKey: process.env.AWS_SECRET
-});
+AWS.config.update(awsconfig);
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 const errorHandle = (err, res) => {
     console.log(err);
