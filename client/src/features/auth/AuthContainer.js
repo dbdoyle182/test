@@ -58,8 +58,6 @@ class AuthContainer extends Component {
             url: "/api/users",
             data: account
           }).then((response) => {
-            console.log(response)
-            console.log('sign up successful!')
             this.setState({
               loading: false,
               method: "signIn"
@@ -73,8 +71,6 @@ class AuthContainer extends Component {
             attributes: { phone_number, name }
           })
           .then((response) => {
-            console.log(response)
-            console.log('sign up successful!')
             this.setState({
               loading: false,
               username,
@@ -105,9 +101,8 @@ class AuthContainer extends Component {
       // Resend code if not received already
       resendSignUp = async () => {
         await Auth.resendSignUp(this.state.username)
-        .then((response) => {
-            
-        console.log(response)            
+        .then((response) => {  
+          console.log(response)            
         })
         .catch(this.errorHandle)
       }
@@ -118,9 +113,13 @@ class AuthContainer extends Component {
 
       if (process.env.NODE_ENV === "development") {
         findUser(username)
+        this.setState({
+          loading: false
+        })
       } else {
         await Auth.signIn(username, password)
         .then(user => {
+          console.log(user)
           if (user.challengeName === "SMS_MFA") {
             this.setState({ user, loading: false });
           } else {
@@ -131,14 +130,13 @@ class AuthContainer extends Component {
           
         })
         .catch(err => {
+          console.log(err)
           if (!err.message) {
-            console.log('Error when signing in: ', err)
             this.setState({
                 loading: false,
                 error: `Error when signing in: ${err}`
             })
           } else {
-            console.log('Error when signing in: ', err.message)
             this.setState({
                 loading: false,
                 error: `Error when signing in: ${err.message}`
@@ -194,9 +192,9 @@ class AuthContainer extends Component {
       
       // Upon confirmation redirect the user to the Sign In page
       forgotPasswordSubmit = async (account) => {
-          this.setState({
-              loading: true
-          })
+        this.setState({
+            loading: true
+        })
         const { username } = this.state;
         const { authCode, password } = account;
         await Auth.forgotPasswordSubmit(username, authCode, password)
@@ -232,7 +230,6 @@ class AuthContainer extends Component {
       this.setState({
         loading: true
       })
-      console.log(values)
       const formErrors = validate(values);
         if (_.isEmpty(formErrors)) {
           this.setState({

@@ -26,15 +26,15 @@ const App = () => {
     return (
       <AppProvider >
           <Grid className="app-grid" container stackable>
-            <Grid.Column width={12}>
+            <Grid.Column width={11}>
               <Grid.Row style={styles.rowStyle}>
                 <RobotContainer />
               </Grid.Row>
-              <Grid.Row style={styles.rowStyle}>
-                <Gameplay />
-              </Grid.Row>
+              {/* <Grid.Row style={styles.rowStyle}>
+                    <Gameplay />
+                  </Grid.Row> */}
             </Grid.Column>
-            <Grid.Column width={4}>
+            <Grid.Column width={5}>
               <Grid.Row style={styles.rowStyle}>
                 <UserContainer />
               </Grid.Row>

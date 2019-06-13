@@ -52,59 +52,10 @@ const utils = {
         );
     },
     addTaskToQueue: (task, robot, callback) => {
-        console.log("Task", task);
-        console.log("Robot", robot);
-        task["number"] = uuid();
-        dynamodb.update(
-            {
-                TableName: "robots",
-                Key: { "robotId": robot.robotId },
-                ReturnValues: "ALL_NEW",
-                UpdateExpression:
-                "set #taskQueue = list_append(if_not_exists(#taskQueue, :empty_list), :task)",
-                ExpressionAttributeNames: {
-                "#taskQueue": "taskQueue",
-                },
-                ExpressionAttributeValues: {
-                ":task": [task],
-                ":empty_list": []
-                }
-            },
-            (err, data) => {
-                if (err) {
-                    callback({ message: "Error!", error: err });
-                } else {
-                    callback({ message: "Task loaded into queue!", data: data });
-                }
-            }
-        )
+        
     },
-    removeTaskFromQueue: (task, robot, callback) => {
-        console.log("Task", task);
-        console.log("Robot", robot);
-        const newQueue = robot.taskQueue.filter(taskInQueue => taskInQueue.number !== task.number)
-        dynamodb.update(
-            { 
-                TableName: "robots",
-                Key: { "robotId": robot.robotId },
-                ReturnValues: "ALL_NEW",
-                UpdateExpression:
-                "set #taskQueue = newQueue",
-                ExpressionAttributeNames: {
-                "#taskQueue": "taskQueue",
-                },
-                ExpressionAttributeValues: {
-                ":newQueue": newQueue
-                }
-            },
-            (err, data) => {
-                if (err) {
-                    callback({ message: "Error!", error: err });
-                } else {
-                    callback({ message: "Task loaded into queue!", data: data });
-                }
-            }
-        )
+    removeTaskFromQueue: (task, robot, res) => {
+        
     }
 }
 

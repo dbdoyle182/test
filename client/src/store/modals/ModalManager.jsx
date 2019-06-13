@@ -1,9 +1,13 @@
 import React from "react";
 import StartUp from "./StartUp";
+import UserOptions from "./UserOptions";
+import RobotOptions from "./RobotOptions";
 import { withAppContext } from "../withAppContext";
 
 const modalLookup = {
-  StartUp: StartUp
+  StartUp: StartUp,
+  UserOptions: UserOptions,
+  RobotOptions: RobotOptions
 };
 
 
