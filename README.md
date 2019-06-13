@@ -4,6 +4,7 @@ Welcome to my interpretation of Bot-O-Mat! I found this a fun opportunity to fle
 
 ## Pre-Requisites 
 
+- Clone this repository to your machine
 - Node installed [Install Now!](https://nodejs.org/en/download/)
 - Yarn installed:
     - Mac users: `brew install yarn`
