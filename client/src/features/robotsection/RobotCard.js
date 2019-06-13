@@ -3,7 +3,7 @@ import { Card, Button, Progress, Dropdown, List, Header, Icon } from "semantic-u
 import taskUtils from "../../store/utils/taskApi";
 import TaskItem from "./TaskItem";
 import _ from "lodash";
-const Task = require("../../store/classes/Task")
+import uuid from "uuid/v1";
 
 
 const levels = [
@@ -125,7 +125,7 @@ const styles = {
     },
     taskList: {
         overflowY: "scroll",
-        maxHeight: "175px"
+        maxHeight: "160px"
     }
 }
 
@@ -139,6 +139,16 @@ class RobotCard extends Component {
             status: false,
             message: ""
         }
+    }
+
+    task = (task, time) => {
+        return {
+            id: uuid(),
+            type: task,
+            time,
+            exp: (time / 1000) + Math.floor(Math.random() * 9)
+        }
+        
     }
 
     addTaskToQueue = (e, data) => {
@@ -161,7 +171,7 @@ class RobotCard extends Component {
             })
         }
         let time = taskOptions.filter(task => task.value === currentTask)[0].time;
-        let newTask = new Task(currentTask, time)
+        let newTask = this.task(currentTask, time)
         let taskQueue = [newTask, ...this.state.taskQueue]
         
         this.setState({
