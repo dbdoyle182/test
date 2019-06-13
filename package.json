@@ -12,10 +12,11 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build",
     "installDeps": "yarn install && cd client && yarn install",
+    "install:db": "bash start.sh",
+    "start:db": "cd ../dynamodb && java -Djava.library.path=./DynamoDBLocal_lib/ -jar DynamoDBLocal.jar",
     "create-db": "cd models && node createRobotDB.js && cd ..",
     "delete-db": "cd models && node deleteRobotDB.js && cd ..",
-    "load-data": "cd models && node loadRobotDB.js && cd ..",
-    "read-data": "cd models && node readRobotDB.js && cd .."
+    "load-data": "cd models && node loadRobotDB.js && cd .."
   },
   "repository": {
     "type": "git",

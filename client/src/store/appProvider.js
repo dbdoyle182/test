@@ -182,7 +182,7 @@ class AppProvider extends Component {
         user: this.state.userData
       }
     }).then(response => {
-      this.findRobots();
+      this.findAllRobots();
       this.findUser(this.state.userData.username);
     }).catch(err => {
       console.log(err);

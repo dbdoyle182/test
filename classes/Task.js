@@ -8,21 +8,21 @@ class Task {
         this.time = time;
         this.exp = (time / 1000) + Math.floor(Math.random() * 9);
 
-        // this.endTask = this.endTask.bind(this);
-        // this.addExperience = this.addExperience.bind(this);
+        this.endTask = this.endTask.bind(this);
+        this.addExperience = this.addExperience.bind(this);
     }
 
-    // addExperience() {
-    //     taskUtils.endTask({type: this.type, time: this.time, exp: this.exp}, this.robot).then(response => {
-    //         return response
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // }
+    addExperience() {
+        taskUtils.endTask({type: this.type, time: this.time, exp: this.exp}, this.robot).then(response => {
+            return response
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
-    // endTask() {
-    //     return this.addExperience()
-    // }
+    endTask() {
+        return this.addExperience()
+    }
 
 }
 
