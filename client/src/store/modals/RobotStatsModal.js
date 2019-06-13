@@ -1,14 +1,14 @@
 import React from "react";
 import { Modal, Button } from "semantic-ui-react";
-import RobotForm from "../forms/RobotForm";
+import RobotStats from "../../features/robotsection/RobotStats";
 
 
-const RobotOptions = ({ modalVisible, closeModal, modalInfo }) => {
-    const { name } = modalInfo;
+const RobotStatsModal = ({ modalVisible, closeModal, modalInfo }) => {
+    console.log(modalInfo)
     return (
         <Modal size={"small"} open={modalVisible} onClose={()=> console.log(modalVisible)}>
             <Modal.Content>
-                <RobotForm name={name} />
+                <RobotStats data={modalInfo} />
             </Modal.Content>
             <Modal.Actions>
                 <Button onClick={closeModal} negative>Close</Button>
@@ -18,4 +18,4 @@ const RobotOptions = ({ modalVisible, closeModal, modalInfo }) => {
 
 }
 
-export default RobotOptions;
+export default RobotStatsModal;

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Card, Button, Progress, Dropdown, List, Header, Icon } from "semantic-ui-react";
+import { Card, Button, Progress, Dropdown, List, Icon } from "semantic-ui-react";
 import taskUtils from "../../store/utils/taskApi";
 import TaskItem from "./TaskItem";
 import _ from "lodash";
 import uuid from "uuid/v1";
-
 
 const levels = [
     {
@@ -177,9 +176,6 @@ class RobotCard extends Component {
         this.setState({
             taskQueue
         })
-        setTimeout(() => {
-            this.removeTaskFromQueue(newTask)
-        }, time + 1000)
     }
 
     removeTaskFromQueue = (completedTask) => {
@@ -201,16 +197,20 @@ class RobotCard extends Component {
                 })
                 
             }).catch(err => {
-                console.log(err)
+                this.setState({
+                    error: {
+                        status: true,
+                        message: "You couldn't complete the task, maybe try harder next time?"
+                    }
+                })
             })
         })
     }
 
     render() {
         const { taskQueue, currentRobot, task, error } = this.state;
-        const { robot, deleteRobot, userData } = this.props;
+        const { robot, deleteRobot, userData, setModalVisible } = this.props;
         let nextLevel = levels.filter(level => level.level === currentRobot.level + 1)[0];
-        console.log(userData)
         return (
             <Card style={styles.robotCard} key={robot.robotId}>
                 <Card.Content>
@@ -218,6 +218,10 @@ class RobotCard extends Component {
                         <h4>{currentRobot.name}</h4>
                         {!_.isEmpty(userData) && <Icon name="cancel" color="red" onClick={() => deleteRobot(robot, userData)} />}
                         <p style={styles.robotLevel}>{currentRobot.level}</p>
+                        <Icon name="database" color="blue" onClick={() => {
+                            console.log(robot)
+                            setModalVisible("RobotStatsModal", currentRobot.tasks)
+                        }} />
                     </Card.Header>
                     <Card.Meta>{currentRobot.type}</Card.Meta>
                     <Card.Description>
@@ -225,7 +229,7 @@ class RobotCard extends Component {
                         <List>
                             <List.Header style={styles.taskHeader}>Task Queue</List.Header>
                             <section style={styles.taskList}>
-                                {taskQueue.length > 0 && taskQueue.map(task => <TaskItem type={task.type} time={task.time} key={task.id} exp={task.exp} />)}
+                                {taskQueue.length > 0 && taskQueue.map(task => <TaskItem type={task.type} removeTaskFromQueue={this.removeTaskFromQueue} task={task} time={task.time} key={task.id} exp={task.exp} />)}
                             </section>
                         </List>
                     </Card.Description>

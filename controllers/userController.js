@@ -5,24 +5,14 @@ const { awsconfig } = require("./utils");
 AWS.config.update(awsconfig);
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 const errorHandle = (err, res) => {
-    console.log(err);
     res.status(400).json(err);
 };
 
 const successHandle = (data, res) => {
-    console.log(data);
     res.status(200).json(data)
 }
 const userController = {
     createUser: (req, res) => {
-        /*
-        {
-            username
-            name
-            phoneNumber
-        }
-        */
-        console.log(req.body); 
         const params = {
             TableName: 'robot-users',
             Item: {
@@ -46,8 +36,6 @@ const userController = {
               username
             }
           };
-          
-          console.log(params)
           
           dynamodb.get(params, function(err, data) {
             if (err) {
@@ -96,7 +84,7 @@ const userController = {
         dynamodb.update(
             {
                 TableName: "robot-users",
-                Key: { username: username },
+                Key: { username },
                 ReturnValues: "ALL_NEW",
                 UpdateExpression: UpdateExpression,
                 ExpressionAttributeNames: ExpressionAttributeNames,
@@ -104,10 +92,9 @@ const userController = {
             },
         (err, data) => {
             if (err) {
-                console.log(err);
-                res.json({ error: err, url: req.url, body: req.body });
+                res.status(400).json({ error: err, url: req.url, body: req.body });
             } else {
-                res.json({ success: "put call succeed!", url: req.url, data: data });
+                res.status(200).json({ success: "User updated!", url: req.url, data: data });
             }
         }
         );

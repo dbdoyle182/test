@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Card, Image, Icon } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 import _ from "lodash";
 import { withAppContext } from "../../store/withAppContext";
 import AuthContainer from "../auth/AuthContainer";

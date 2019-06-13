@@ -10,13 +10,12 @@ const styles = {
 }
 
 const Leaderboard = ({ context }) => {
-    console.log(context);
     return (
         <Segment style={styles.leaderboard}>
             <Header>Leaderboard</Header>
             <List>
                 {context.allRobots && context.allRobots.reverse().map((robot, index) => {
-                    return <p>{index + 1}. {robot.name} {`Exp. ${robot.experience}`} {robot.owner !== "wild" && `Created By ${robot.owner}`}</p>
+                    return <p key={robot.robotId}>{index + 1}. {robot.name} {`Exp. ${robot.experience}`} {robot.owner !== "wild" && `Created By ${robot.owner}`}</p>
                 })}
             </List>
         </Segment>

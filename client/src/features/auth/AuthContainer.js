@@ -31,10 +31,12 @@ const styles = {
 class AuthContainer extends Component {
     state = {
         method: "signIn",
-        loading: false
+        loading: false,
+        username: ""
     }
 
     errorHandle = (err) => {
+        console.log(err);
         if (!err.message) {
             this.setState({
                 error: err,
@@ -46,6 +48,12 @@ class AuthContainer extends Component {
                 loading: false
             })
           }
+    }
+
+    setUsername = (username) => {
+      this.setState({
+        username
+      })
     }
 
     signUp = async (account) => {
@@ -102,13 +110,12 @@ class AuthContainer extends Component {
       resendSignUp = async () => {
         await Auth.resendSignUp(this.state.username)
         .then((response) => {  
-          console.log(response)            
         })
         .catch(this.errorHandle)
       }
 
     signIn = async (account) => {
-      const { setGlobalState, closeModal, findUser } = this.props.context;
+      const { setGlobalState, findUser } = this.props.context;
       const { username, password } = account;
 
       if (process.env.NODE_ENV === "development") {
@@ -119,7 +126,6 @@ class AuthContainer extends Component {
       } else {
         await Auth.signIn(username, password)
         .then(user => {
-          console.log(user)
           if (user.challengeName === "SMS_MFA") {
             this.setState({ user, loading: false });
           } else {
@@ -130,18 +136,7 @@ class AuthContainer extends Component {
           
         })
         .catch(err => {
-          console.log(err)
-          if (!err.message) {
-            this.setState({
-                loading: false,
-                error: `Error when signing in: ${err}`
-            })
-          } else {
-            this.setState({
-                loading: false,
-                error: `Error when signing in: ${err.message}`
-            })
-          }
+          this.errorHandle(err);
         })
       }
     }
@@ -176,17 +171,7 @@ class AuthContainer extends Component {
           })
         })
         .catch(err => {
-          if (! err.message) {
-            console.log('Error while setting up the new password: ', err)
-            this.setState({
-                loading: false
-            })
-          } else {
-            console.log('Error while setting up the new password: ', err.message)
-            this.setState({
-                loading: false
-            })
-          }
+          this.errorHandle(err)
         })
       }
       
@@ -254,7 +239,7 @@ class AuthContainer extends Component {
             case "newPw":
                 return <NewPasswordForm loading={loading} error={error} success={success} formErrors={formErrors} forgotPasswordSubmit={this.forgotPasswordSubmit} switchForm={this.switchForm} onSubmit={this.onSubmit}/>;
             case "challenge":
-                return <ChallengeForm loading={loading} error={error} success={success} formErrors={formErrors} resendCode={this.resendSignUp} confirmSignUp={this.confirmSignUp} confirmChallenge={this.confirmChallenge} switchForm={this.switchForm} onSubmit={this.onSubmit}/>;
+                return <ChallengeForm loading={loading} error={error} success={success} formErrors={formErrors} resendCode={this.resendSignUp} confirmSignUp={this.confirmSignUp} confirmChallenge={this.confirmChallenge} switchForm={this.switchForm} onSubmit={this.onSubmit} setUsernameGlobal={this.setUsername}/>;
             default: 
                 return <SignInForm loading={loading} error={error} success={success} formErrors={formErrors} signIn={this.signIn} switchForm={this.switchForm} onSubmit={this.onSubmit} />;
                 

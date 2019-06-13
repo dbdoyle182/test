@@ -5,8 +5,6 @@ import "semantic-ui-css/semantic.min.css";
 import aws_exports from "../../aws-exports";
 import AppProvider from "../../store/appProvider";
 import RobotContainer from "../../features/robotsection/RobotContainer";
-import Gameplay from "../../features/gameplay/Gameplay";
-import "./App.css";
 import UserContainer from "../../features/user/UserContainer";
 import Leaderboard from "../../features/leaderboard/Leaderboard";
 
@@ -25,14 +23,11 @@ const styles = {
 const App = () => {
     return (
       <AppProvider >
-          <Grid className="app-grid" container stackable>
+          <Grid container stackable>
             <Grid.Column width={11}>
               <Grid.Row style={styles.rowStyle}>
                 <RobotContainer />
               </Grid.Row>
-              {/* <Grid.Row style={styles.rowStyle}>
-                    <Gameplay />
-                  </Grid.Row> */}
             </Grid.Column>
             <Grid.Column width={5}>
               <Grid.Row style={styles.rowStyle}>

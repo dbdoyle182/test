@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Icon, Image, Button } from "semantic-ui-react";
+import { Card, Icon, Button } from "semantic-ui-react";
 
 const styles = {
     editButton: {
@@ -7,13 +7,11 @@ const styles = {
     }
 }
 
-
 const UserCard = ({ user, openModal }) => {
     const { name, username, description, robots } = user
     console.log(robots)
     return (
         <Card>
-            {/* <Image src={} wrapped ui={false} /> */}
             <Card.Content>
                 <Card.Header>
                     {name} 

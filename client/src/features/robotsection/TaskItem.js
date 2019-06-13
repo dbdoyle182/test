@@ -5,12 +5,17 @@ import { Progress } from "semantic-ui-react"
 class TaskItem extends Component {
     state = {
         time: this.props.time,
-        startingTime: 500
+        startingTime: 0
     }
     componentDidMount() {
         let taskInterval = setInterval(() => {
             this.setState({
                 startingTime: this.state.startingTime + 1000
+            }, () => {
+                if (this.state.startingTime > this.state.time) {
+                    clearInterval(taskInterval);
+                    this.props.removeTaskFromQueue(this.props.task)
+                }
             })
         }, 1000)
     }

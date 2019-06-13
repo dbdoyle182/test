@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button, Grid } from "semantic-ui-react";
 import { withAppContext } from "../withAppContext";
 import RobotForm from "../forms/RobotForm";

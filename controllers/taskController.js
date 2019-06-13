@@ -67,24 +67,44 @@ const taskArray = [
 
   const levels = [
     {
-        level: 1,
-        expTo: 50
+      level: 1,
+      expTo: 50
     },
     {
-        level: 2,
-        expTo: 150
+      level: 2,
+      expTo: 150
     },
     {
-        level: 3,
-        expTo: 450
+      level: 3,
+      expTo: 450
     },
     {
-        level: 4,
-        expTo: 1350
+      level: 4,
+      expTo: 1350
     },
     {
-        level: 5,
-        expTo: 4050
+      level: 5,
+      expTo: 2500
+    },
+    {
+      level: 6,
+      expTo: 3650
+    },
+    {
+      level: 7,
+      expTo: 5000
+    },
+    {
+      level: 8,
+      expTo: 7500
+    },
+    {
+      level: 9,
+      expTo: 8500
+    },
+    {
+      level: 10,
+      expTo: 10000
     }
 ];
 
@@ -134,9 +154,9 @@ const taskController = {
             },
             (err, data) => {
                 if (err) {
-                    res.json({ message: "Error!", error: err });
+                    res.status(400).json({ message: "Error!", error: err });
                 } else {
-                    res.json({ message: `${robot.name} has completed ${task.type}`, data: data });
+                    res.status(200).json({ message: `${robot.name} has completed ${task.type}`, data: data });
                 }
             }
         )

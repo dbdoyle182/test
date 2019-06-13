@@ -3,6 +3,7 @@ import _ from "lodash";
 import { Message } from "semantic-ui-react";
 
 const MessageSection = ({ error, success, formErrors}) => {
+    console.log(error)
     return (
         <React.Fragment>
             {success && <Message success header='Success' content="You have successfully signed up!" />}

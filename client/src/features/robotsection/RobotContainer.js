@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, Header, Button, Card } from "semantic-ui-react";
+import { Segment, Button } from "semantic-ui-react";
 import RobotCard from "./RobotCard";
 import { withAppContext } from "../../store/withAppContext";
 import _ from "lodash";
@@ -41,7 +41,7 @@ class RobotContainer extends Component {
                 
                 <section style={styles.robotSectionCardGroup} >
                     {robotPool && robotPool.map(robot => {
-                        return <RobotCard robot={robot} userData={userData} key={robot.robotId} addTaskToQueue={addTaskToQueue} startTask={startTask} findRobotById={findRobotById} deleteRobot={deleteRobot} findAllRobots={findAllRobots} />
+                        return <RobotCard setModalVisible={setModalVisible} robot={robot} userData={userData} key={robot.robotId} addTaskToQueue={addTaskToQueue} startTask={startTask} findRobotById={findRobotById} deleteRobot={deleteRobot} findAllRobots={findAllRobots} />
                     })}
                 </section>
             </Segment>

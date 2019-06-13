@@ -1,79 +1,36 @@
-# BOT-O-MAT
-Use any language to complete this challenge. The implementation is up to you: it can be a command-line application or have a graphical interface.
+# Bot-O-Mat (The Game)
 
-Your application should collect a name and robot type from the types we list below. For each, it should create a Robot of the type the user chooses, e.g. Larry, Bipedal. 
+Welcome to my interpretation of Bot-O-Mat! I found this a fun opportunity to flex my full stack skills by build a React UI on top of a Node/Express backend. I've spent plenty of time playing tap centric mobile games (hopefully I'm not alone in that!) and thought it would be fun to take a crack at replicating that idea with this assignment. I've built this application using a DERN stack (MERN with the usage of DyanamoDB as my NoSQL versus MongoDB).
 
-Given the list of tasks below, your application should then assign the Robot a set of five tasks, all of which complete after a duration that we show in milliseconds. 
+## Pre-Requisites 
 
+- Node installed [Install Now!](https://nodejs.org/en/download/)
+- Yarn installed:
+    - Mac users: `brew install yarn`
+    - Windows users: [Click Here!](https://yarnpkg.com/latest.msi)
+    - Note: _Yarn is not required but recommended, the scripts written within the package.json utilize Yarn_
+- Java past version 6.X 
+    - Download Standard Edition (currently 12.0.1) [here](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+    - Check to make sure Java is in your environmental variables by running `java -version`
+- Dynamo DB .tar.gz 
+    - Download the file [here](https://s3-us-west-2.amazonaws.com/dynamodb-local/dynamodb_local_latest.tar.gz) and be sure to unpack one directory above this one
+        OR
+    - If you are a Mac user navigate to the repository in an instance of bash and run `yarn install:db` (This will grab the tar.gz and unpack it one directory above this repository and start up the local Dynamo DB instace)
 
+## Getting Started
 
-- Collect a name and robot type from user.
-- Instantiate a Robot of the type provided by the user with the name provided by the user
-  - for example: Bipedal, Larry
-- Set up methods on Robot to complete tasks from the provided list
+_If you don't feel like spinning up a local version of this application you can go [here](https://rocky-shore-28642.herokuapp.com/) to see a version live on Heroku, it is built with a Dynamo DB database and allows for user authentication and database creation using Cognito and triggers within Cognito_
 
-## Robot
-Robot completes tasks and removes them from the list when they are done (i.e. enough time has passed since starting the task).
-
-## Tasks
-Tasks have a description and an estimated time to complete.
-
-```
-[
-  {
-    description: 'do the dishes',
-    eta: 1000,
-  },{
-    description: 'sweep the house',
-    eta: 3000,
-  },{
-    description: 'do the laundry',
-    eta: 10000,
-  },{
-    description: 'take out the recycling',
-    eta: 4000,
-  },{
-    description: 'make a sammich',
-    eta: 7000,
-  },{
-    description: 'mow the lawn',
-    eta: 20000,
-  },{
-    description: 'rake the leaves',
-    eta: 18000,
-  },{
-    description: 'give the dog a bath',
-    eta: 14500,
-  },{
-    description: 'bake some cookies',
-    eta: 8000,
-  },{
-    description: 'wash the car',
-    eta: 20000,
-  },
-]
-```
-
-## Types
-```
-{ 
-  UNIPEDAL: 'Unipedal',
-  BIPEDAL: 'Bipedal',
-  QUADRUPEDAL: 'Quadrupedal',
-  ARACHNID: 'Arachnid',
-  RADIAL: 'Radial',
-  AERONAUTICAL: 'Aeronautical'
-}
-```
-
-## Features to add once the core functionality is complete
-Be creative and have fun! Use this list or create your own features.
-- Allow users to create multiple robots at one time
-- Create a leaderboard for tasks completed by each Robot
-- Create tasks specific for each robot type, this could work in conjunction with the leaderboard. For e.g. robots that are assigned tasks that their type can’t perform won’t get “credit” for finishing the task.
-- Add persistance for tasks, bots and leaderboard stats
-
-
-## Authors
-- Scott Hoffman <https://github.com/scottshane>
-- Olivia Osby <https://github.com/oosby>
+- Navigate to the repository in an instance of bash/command line (new instance if you utilized `yarn install:db`) and run `yarn installDeps`
+    - _This will install dependencies for both the nodejs backend and the React frontend_
+- From there, if you do not have Dynamo DB running yet, run the `yarn start:db` command to start it up
+    - NOTE: If you downloaded and unpacked the tar.gz file in a directory other than the one above this repository this script _will not work_ if that is the case you can still spin up Dynamo DB locally just navigate to the directory in which you unpacked the tar.gz file and run `java -Djava.library.path=./DynamoDBLocal_lib/ -jar DynamoDBLocal.jar"`
+- Once Dynamo DB is running (leave it running), go ahead and run `yarn create:db` and when that is successful run `yarn load:data` (_These will create the tables for the local version of the application and load them with some dummy data_)
+- Create a `.env` file in the root of this repository and include the following: 
+    ```
+        AWS_ID=something
+        AWS_KEY=somethingelse
+    ```
+    _Local instances of DynamoDB do not require valid AWS credentials, just the presense of them_
+- Finally, run `yarn start` and the server will start up with the React app following closely behind, the browser should pop when ready but if it doesn't open your browser to [localhost:3000](http://localhost:3000)
+    - Note: Clear port 3000 if you are already running something there.

@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import ModalManager from "./modals/ModalManager";
-// AWS Resource imports
-import API from '@aws-amplify/api';
 import _ from "lodash";
 import Auth from '@aws-amplify/auth';
-import Cache from "@aws-amplify/cache";
 import axios from "axios";
 import Amplify from "@aws-amplify/core";
 import awsmobile from "../aws-exports";
@@ -30,7 +27,6 @@ class AppProvider extends Component {
     this.findAllRobots();
     this.findWildRobots();
     Auth.currentAuthenticatedUser().then(user => {
-      console.log(user)
       this.findUser(user.username)
     }).catch(err => {
       
@@ -49,10 +45,13 @@ class AppProvider extends Component {
 
   // Does what the name says, closes the modal
   closeModal = () => {
-    this.setState({ modalVisible: false, modalInfo: {} }, () => {
-      console.log(this.state.modalVisible)
-    });
+    this.setState({ modalVisible: false, modalInfo: {} });
   };
+
+  // Checks the cache before loading data again
+  checkTheCache = () => {
+
+  }
 
   // Sets item in sessionStorage
   setSessionStorage = (key, value) => {
@@ -95,7 +94,6 @@ class AppProvider extends Component {
     }).then(response => {
         successHandle(response)
         if (response.data.data) {
-          console.log(response.data.data.Attributes)
           this.setState({
             userData: response.data.data.Attributes
           }, () => {
@@ -103,12 +101,9 @@ class AppProvider extends Component {
           });
           
         } else {
-          console.log(response)
           this.findWildRobots();
           this.findAllRobots();
         }
-        
-      
     }).catch(err => {
       errorHandle(err)
     })
@@ -147,7 +142,6 @@ class AppProvider extends Component {
       method: "GET",
       url: `/api/robot/all`
     }).then(response => {
-      console.log(response.data)
       this.setState({
         allRobots: response.data,
         sortedRobots: response.data.sort((a, b) => (a.experience > b.experience) ? 1 : -1)
@@ -222,7 +216,6 @@ class AppProvider extends Component {
         username: userData.username
       }
     }).then(response => {
-      console.log(response)
       this.setState({
         userData: response.data.data.Attributes
       }, () => {
@@ -231,47 +224,6 @@ class AppProvider extends Component {
     }).catch(err => {
       callback(err)
     })
-  }
-
-  // Select a task to complete
-  startTask = (task, robot, callback) => {
-    
-  };
-
-  // Add task to queue
-  addTaskToQueue = (task, robot, callback) => {
-    axios({
-      method: "PUT",
-      url: "/api/tasks",
-      data: {
-        task,
-        robot
-      }
-    }).then(response => {
-      callback(response)
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
-  // Remove task from robot queue
-  removeTaskFromQueue = (task, robot, callback) => {
-    axios({
-      method: "DELETE",
-      url: "/api/tasks",
-      data: {
-        task,
-        robot
-      }
-    }).then(response => {
-      callback(response)
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
-  sortLeaderBoard = () => {
-
   }
   
 
@@ -295,10 +247,7 @@ class AppProvider extends Component {
           findRobotById: this.findRobotById,
           findAllRobots: this.findAllRobots,
           findWildRobots: this.findWildRobots,
-          deleteRobot: this.deleteRobot,
-          startTask: this.startTask,
-          addTaskToQueue: this.addTaskToQueue,
-          removeTaskFromQueue: this.removeTaskFromQueue
+          deleteRobot: this.deleteRobot
         }}
       >
         <ModalManager

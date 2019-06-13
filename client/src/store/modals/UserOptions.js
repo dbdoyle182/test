@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Modal, Button, Grid } from "semantic-ui-react";
+import React from "react";
+import { Modal, Button } from "semantic-ui-react";
 import { withAppContext } from "../withAppContext";
 import UserOptionsForm from "../forms/UserOptionsForm";
-import AuthContainer from "../../features/auth/AuthContainer";
-
 
 const UserOptions = ({ modalVisible, closeModal, modalInfo, context }) => {
     const { updateUser } = context;

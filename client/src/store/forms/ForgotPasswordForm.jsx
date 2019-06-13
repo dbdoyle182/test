@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import { Form, Button, Label, Divider } from "semantic-ui-react";
+import { Form, Button, Divider } from "semantic-ui-react";
 import {
   combineValidators,
   isRequired
 } from "revalidate";
-import { hasError } from "revalidate/assertions";
-
 
 const validate = combineValidators({
   username: isRequired("Username")
@@ -25,7 +23,8 @@ const ForgotPasswordForm = ({
   invalid,
   loading,
   switchForm,
-  forgotPassword
+  forgotPassword,
+  onSubmit
 }) => {
   const [username, setUsername] = useState("");
   return (
@@ -34,8 +33,7 @@ const ForgotPasswordForm = ({
         const forgotValues = {
           username
         }
-        console.log(forgotValues)
-        // forgotPassword(account.values)
+        onSubmit(forgotValues, forgotPassword, validate)
       }}
     >
       <Form.Input

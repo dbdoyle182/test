@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import { Form, Button, Label, Divider } from "semantic-ui-react";
+import { Form, Button, Divider } from "semantic-ui-react";
 import {
   combineValidators,
   isRequired,
   composeValidators,
   hasLengthGreaterThan,
-  isAlphaNumeric,
-  createValidator
+  isAlphaNumeric
 } from "revalidate";
-import { hasError } from "revalidate/assertions";
+import MessageSection from "./MessageSection";
 
 
 const validate = combineValidators({
@@ -27,10 +26,13 @@ const styles = {
 
 const NewPasswordForm = ({
   error,
+  formErrors,
+  success,
   invalid,
   loading,
   switchForm,
-  forgotPasswordSubmit
+  forgotPasswordSubmit,
+  onSubmit
 }) => {
   const [password, setPassword] = useState("");
   const [authCode, setAuthCode] = useState("")
@@ -42,9 +44,10 @@ const NewPasswordForm = ({
           authCode
         }
         console.log(newPassword)
-        // forgotPasswordSubmit(account.values)
+        onSubmit(newPassword, forgotPasswordSubmit, validate)
       }}
     >
+      <MessageSection error={error} succes={success} formErrors={formErrors} />
       <Form.Input
         required
         value={authCode}
@@ -57,7 +60,7 @@ const NewPasswordForm = ({
       <Form.Input
         required
         value={password}
-        onChange={(e, data) => setPassword(password)}
+        onChange={(e, data) => setPassword(data.value)}
         name="password"
         type="password"
         placeholder="****************"

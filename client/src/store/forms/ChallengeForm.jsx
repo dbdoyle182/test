@@ -9,7 +9,8 @@ import MessageSection from "./MessageSection";
 
 
 const validate = combineValidators({
-  authCode: isRequired("Confirmation Code")
+  authCode: isRequired("Confirmation Code"),
+  username: isRequired("Username")
 });
 
 const styles = {
@@ -31,9 +32,12 @@ const ChallengeForm = ({
   switchForm,
   resendCode,
   confirmSignUp,
-  onSubmit
+  onSubmit,
+  setUsernameGlobal
 }) => {
+  console.log(error)
   const [authCode, setAuthCode] = useState("");
+  const [username, setUsername] = useState("");
   return (
     <Form
       onSubmit={(e, data) => {
@@ -44,11 +48,24 @@ const ChallengeForm = ({
             console.log("MFA")
         } else {
             onSubmit(challengeValues, confirmSignUp, validate)
-            console.log("Confirmation Code")
         }
       }}
+      error={error}
+      success={success}
     >
       <MessageSection error={error} success={success} formErrors={formErrors} />
+      <Form.Input
+        required
+        name="username"
+        type="text"
+        onChange={(e, data) => {
+          setUsername(data.value)
+          setUsernameGlobal(data.value)
+        }}
+        placeholder="ex. robotman123"
+        label="Username"
+        value={username}
+      />
       <Form.Input
         required
         name="authCode"
