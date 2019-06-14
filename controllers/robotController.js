@@ -141,16 +141,11 @@ const robotController = {
             if (err) { 
                 errorHandle(err, res)
             } else {
-                console.log(data.Items)
                 let sortedRobots = data.Items.sort((a, b) => {
-                    console.log("A", a.experience)
-                    console.log("B", b.experience)
-                    console.log(parseInt(b.experience) - parseInt(a.experience))
                     return parseInt(b.experience) - parseInt(a.experience) * -1
                 });      
-
-                console.log(sortedRobots)
-                successHandle(sortedRobots, res)
+                
+                successHandle(sortedRobots, res);
             }
         })
     },

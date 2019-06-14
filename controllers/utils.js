@@ -12,8 +12,8 @@ if(process.env.NODE_ENV === "production") {
     awsconfig = {
         region: `us-east-1`,
         endpoint: "http://localhost:8000",
-        accessKeyId: process.env.AWS_ID,
-        secretAccessKey: process.env.AWS_SECRET
+        accessKeyId: "something",
+        secretAccessKey: "somethingelse"
       }
 }
 // Set the region

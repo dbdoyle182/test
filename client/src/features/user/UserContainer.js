@@ -18,7 +18,7 @@ const UserContainer = ({ context }) => {
             {_.isEmpty(context.userData) ?
             <AuthContainer />
             :
-            <UserCard user={context.userData} openModal={context.setModalVisible} />
+            <UserCard user={context.userData} openModal={context.setModalVisible} signOut={context.signOut} />
             }
         </Segment>
     )    

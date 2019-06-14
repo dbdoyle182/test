@@ -186,21 +186,12 @@ class AuthContainer extends Component {
         .then(() => {
           console.log('The new password submitted successfully')
           this.setState({
-              method: "signIn"
+              method: "signIn",
+              loading: false
           })
         })
         .catch(err => {
-          if (! err.message) {
-            console.log('Error while confirming the new password: ', err)
-            this.setState({
-                loading: false
-            })
-          } else {
-            console.log('Error while confirming the new password: ', err.message)
-            this.setState({
-                loading: false
-            })
-          }
+          this.errorHandle(err);
         })
       }
 

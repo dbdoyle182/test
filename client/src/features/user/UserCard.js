@@ -7,14 +7,14 @@ const styles = {
     }
 }
 
-const UserCard = ({ user, openModal }) => {
+const UserCard = ({ user, openModal, signOut }) => {
     const { name, username, description, robots } = user
-    console.log(robots)
     return (
         <Card>
             <Card.Content>
                 <Card.Header>
-                    {name} 
+                    {name}
+                    <Button onClick={signOut}>Sign Out</Button> 
                 </Card.Header>
                 <Card.Meta>
                     <span>{username}</span>

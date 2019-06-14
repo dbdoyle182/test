@@ -225,6 +225,19 @@ class AppProvider extends Component {
       callback(err)
     })
   }
+
+  // Sign out user
+  signOut = () => {
+    Auth.signOut().then(response => {
+      this.findWildRobots()
+      this.setState({
+        userData: {},
+        robots: []
+      })
+    }).catch(err => {
+      console.log(err);
+    })
+  }
   
 
   render() {
@@ -247,7 +260,8 @@ class AppProvider extends Component {
           findRobotById: this.findRobotById,
           findAllRobots: this.findAllRobots,
           findWildRobots: this.findWildRobots,
-          deleteRobot: this.deleteRobot
+          deleteRobot: this.deleteRobot,
+          signOut: this.signOut
         }}
       >
         <ModalManager

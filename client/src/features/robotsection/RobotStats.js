@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { VictoryBar, VictoryChart, VictoryAxis } from "victory";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryPie, VictoryLabel } from "victory";
 import { Button, Header } from "semantic-ui-react";
 
 const BarChart = ({ stat, chartData }) => (
@@ -47,6 +47,25 @@ const BarChart = ({ stat, chartData }) => (
     </VictoryChart>
 )
 
+const PieChart = ({ stat, chartData }) => {
+    let revisedData; 
+    if (stat === "Total") {
+        revisedData = chartData.filter(data => data.times !== 0);
+    } else {
+        revisedData = chartData.filter(data => data.timespent !== 0);
+    }
+    return (
+        <VictoryPie
+            colorScale={["tomato", "orange", "gold", "cyan", "navy", "purple", "yellow", "lime", "pink", "lavender" ]}
+            innerRadius={90}
+            height={250}
+            labels={["Dishes", "Sweep", "Laundry", "Recycle", "Sammich", "Lawn", "Rake", "Dog Bath", "Bake", "Wash Car"]}
+            data={revisedData}
+            x="description"
+            y={stat === "Total" ? "times" : "timespent"}
+        />
+    )
+}
 
 
 
@@ -80,7 +99,7 @@ const RobotStats = ({ data }) => {
                 chart === "Bar" ?
                     <BarChart stat={stat} chartData={data} />
                     :
-                    <div>Pie</div>
+                    <PieChart stat={stat} chartData={data} />
             }
         </React.Fragment>
     )

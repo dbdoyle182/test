@@ -168,6 +168,7 @@ class RobotCard extends Component {
                     message: "Select a task first!"
                 }
             })
+            return;
         }
         let time = taskOptions.filter(task => task.value === currentTask)[0].time;
         let newTask = this.task(currentTask, time)
@@ -218,10 +219,12 @@ class RobotCard extends Component {
                         <h4>{currentRobot.name}</h4>
                         {!_.isEmpty(userData) && <Icon name="cancel" color="red" onClick={() => deleteRobot(robot, userData)} />}
                         <p style={styles.robotLevel}>{currentRobot.level}</p>
+                        {currentRobot.experience !== 0 &&
                         <Icon name="database" color="blue" onClick={() => {
                             console.log(robot)
                             setModalVisible("RobotStatsModal", currentRobot.tasks)
                         }} />
+                        }
                     </Card.Header>
                     <Card.Meta>{currentRobot.type}</Card.Meta>
                     <Card.Description>

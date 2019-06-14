@@ -43,7 +43,6 @@ const NewPasswordForm = ({
           password,
           authCode
         }
-        console.log(newPassword)
         onSubmit(newPassword, forgotPasswordSubmit, validate)
       }}
     >

@@ -1,7 +1,9 @@
 const AWS = require("aws-sdk");
 AWS.config.update({
   region: "us-east-1",
-  endpoint: "http://localhost:8000"
+  endpoint: "http://localhost:8000",
+  accessKeyId: "something",
+  secretAccessKey: "somethingelse"
 });
 const dynamodb = new AWS.DynamoDB();
 const robotParams = {
