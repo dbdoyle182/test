@@ -221,7 +221,6 @@ class RobotCard extends Component {
                         <p style={styles.robotLevel}>{currentRobot.level}</p>
                         {currentRobot.experience !== 0 &&
                         <Icon name="database" color="blue" onClick={() => {
-                            console.log(robot)
                             setModalVisible("RobotStatsModal", currentRobot.tasks)
                         }} />
                         }

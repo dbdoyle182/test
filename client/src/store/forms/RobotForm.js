@@ -32,7 +32,6 @@ const RobotForm = ({ context }) => {
     const [type, setType] = useState("")
 
     const errorHandle = (err) => {
-        console.log(err);
         isSuccess(false);
         isError({
             error: true,
@@ -42,7 +41,6 @@ const RobotForm = ({ context }) => {
     }
 
     const successHandle = (data) => {
-        console.log(data);
         isSuccess(true);
         isError({
             error: false,

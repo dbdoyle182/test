@@ -72,15 +72,6 @@ const userController = {
 
         UpdateExpression = UpdateExpression.slice(0, -1);
 
-        console.log({
-            TableName: "robot-users",
-            Key: { username: username },
-            ReturnValues: "ALL_OLD",
-            UpdateExpression: UpdateExpression,
-            ExpressionAttributeNames: ExpressionAttributeNames,
-            ExpressionAttributeValues: ExpressionAttributeValues
-        })
-
         dynamodb.update(
             {
                 TableName: "robot-users",

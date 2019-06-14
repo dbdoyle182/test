@@ -23,7 +23,6 @@ const UserOptionsForm = ({ name, description, username, robots, updateUser }) =>
     const [newDescription, setDescription] = useState(description)
 
     const errorHandle = (err) => {
-        console.log(err);
         isSuccess(false);
         isError({
             error: true,

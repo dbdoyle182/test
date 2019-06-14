@@ -161,8 +161,6 @@ const robotController = {
             }
         }
         let newRobots = user.robots.filter(oldRobot => {
-            console.log("old robot id", oldRobot);
-            console.log(robot.robotId)
             return oldRobot !== robot.robotId
         });
         const userParams = {

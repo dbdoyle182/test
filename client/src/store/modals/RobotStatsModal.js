@@ -4,9 +4,8 @@ import RobotStats from "../../features/robotsection/RobotStats";
 
 
 const RobotStatsModal = ({ modalVisible, closeModal, modalInfo }) => {
-    console.log(modalInfo)
     return (
-        <Modal size={"small"} open={modalVisible} onClose={()=> console.log(modalVisible)}>
+        <Modal size={"small"} open={modalVisible}>
             <Modal.Content>
                 <RobotStats data={modalInfo} />
             </Modal.Content>

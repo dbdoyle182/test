@@ -116,11 +116,6 @@ const SignUpForm = ({
       <Button disabled={invalid} loading={loading} color="green" type="submit">
         Sign Up
       </Button>
-      <Button color="red" loading={loading} type="reset" onClick={() => {
-        console.log("reset")
-      }}>
-        Cancel
-      </Button>
     </Form>
   );
 }

@@ -7,7 +7,7 @@ const UserOptions = ({ modalVisible, closeModal, modalInfo, context }) => {
     const { updateUser } = context;
     const { name, description, robots, username } = modalInfo;
     return (
-        <Modal size={"small"} open={modalVisible} onClose={()=> console.log(modalVisible)}>
+        <Modal size={"small"} open={modalVisible}>
             <Modal.Content>
                 <UserOptionsForm name={name} description={description} robots={robots} username={username} updateUser={updateUser} />
             </Modal.Content>

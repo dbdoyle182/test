@@ -35,7 +35,6 @@ const ChallengeForm = ({
   onSubmit,
   setUsernameGlobal
 }) => {
-  console.log(error)
   const [authCode, setAuthCode] = useState("");
   const [username, setUsername] = useState("");
   return (
@@ -45,7 +44,7 @@ const ChallengeForm = ({
           authCode
         }
         if (signIn) {
-            console.log("MFA")
+          // MFA options placeholder
         } else {
             onSubmit(challengeValues, confirmSignUp, validate)
         }
@@ -81,13 +80,7 @@ const ChallengeForm = ({
          
       <Button disabled={invalid} loading={loading} type="submit" color="green">
         Confirm
-      </Button>
-      <Button color="red" loading={loading} type="reset" onClick={() => { 
-        console.log("reset")
-      }}>
-        Cancel
-      </Button>
-          
+      </Button> 
     </Form>
   );
 }

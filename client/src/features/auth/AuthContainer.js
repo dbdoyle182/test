@@ -36,7 +36,6 @@ class AuthContainer extends Component {
     }
 
     errorHandle = (err) => {
-        console.log(err);
         if (!err.message) {
             this.setState({
                 error: err,
@@ -149,21 +148,13 @@ class AuthContainer extends Component {
             
         
       }).catch(err => {
-        if (!err.message) {
-          console.log('Error when signing in: ', err)
-         
-        } else {
-          console.log('Error when signing in: ', err.message)
-          
-        }
+        this.errorHandle(err);
       })
     }
     forgotPassword = async (account) => {
         const { username } = account;
         await Auth.forgotPassword(username)
         .then(data => {
-          console.log('New code sent', data)
-        //   toastr.success('New code sent to:', data.CodeDeliveryDetails.Destination)
           this.setState({
               username,
               method: "newPw",

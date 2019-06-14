@@ -8,7 +8,7 @@ import AuthContainer from "../../features/auth/AuthContainer";
 const StartUp = ({ modalVisible, closeModal }) => {
     
     return (
-        <Modal size={"large"} open={modalVisible} onClose={()=> console.log(modalVisible)}>
+        <Modal size={"large"} open={modalVisible}>
             <Modal.Header>Welcome to Bot-O-Mat!</Modal.Header>
             <Modal.Content>
                 <Grid columns={2}>

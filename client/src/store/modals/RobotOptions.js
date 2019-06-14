@@ -6,7 +6,7 @@ import RobotForm from "../forms/RobotForm";
 const RobotOptions = ({ modalVisible, closeModal, modalInfo }) => {
     const { name } = modalInfo;
     return (
-        <Modal size={"small"} open={modalVisible} onClose={()=> console.log(modalVisible)}>
+        <Modal size={"small"} open={modalVisible} >
             <Modal.Content>
                 <RobotForm name={name} />
             </Modal.Content>

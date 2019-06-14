@@ -25,8 +25,6 @@ const utils = {
     awsconfig: awsconfig,
     addRobotToUser: (username, robot, callback) => {
         const { robotId } = robot;
-        console.log("Username", username);
-        console.log("Robot", robot)
         dynamodb.update(
         {
             TableName: "robot-users",

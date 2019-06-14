@@ -3,7 +3,6 @@
 
 const testController = {
     testMethod: (req, res) => {
-        console.log(req.query)
         const { time } = req.query
 
         setTimeout(() => {
